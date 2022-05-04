@@ -13,6 +13,7 @@ session_start();
 define('ROOT', dirname(__FILE__));
 require_once(ROOT.'/captcha/vendor/autoload.php');
 require_once(ROOT.'/components/Autoload.php');
+require_once(ROOT.'/libs/Smarty.class.php');
 
 // 3. Установка соединения с БД
 

@@ -1,4 +1,4 @@
-<?php include ROOT.'/views/include/header.php'; ?>
+{include file="{ROOT}/views/include/header.php"}
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="box-element">

@@ -20,7 +20,12 @@ class CartController {
             $totalPrice = Cart::getTotalPrice($products);
         }
 
-		require_once(ROOT . '/views/cart/index.php');
+        $smarty = new Smarty();
+        $smarty->assign('products', $products);
+        $smarty->assign('productsInCart', $productsInCart);
+        $smarty->assign('totalProducts', count($products));
+        $smarty->assign('totalPrice', $totalPrice);
+        $smarty->display(ROOT.'/views/cart/index.tpl');
 
 		return true;
 	}
