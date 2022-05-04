@@ -21,6 +21,8 @@ require_once(ROOT . '/application/app/Models/Products.php');
 
 // 3. Установка соединения с БД
 
+use Models\Database;
+$DB = new Database();
 
 // 4. Вызор Router
 

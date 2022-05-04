@@ -1,10 +1,11 @@
 <?php
 
+use Models\Products;
+
 class CartController {
 
-	public function actionIndex() {
+    public function actionIndex() {
 
-        $productsInCart = false;
         $totalPrice = 0;
         $products = [];
 
@@ -14,8 +15,8 @@ class CartController {
         if ($productsInCart) {
             // Получаем полную информацию о товарах для списка
             $productsIds = array_keys($productsInCart);
-            $products = Product::getProdustsByIds($productsIds);
-            
+            $products = Products::whereIn('id', $productsIds)->get();
+
             // Получаем общую стоимость товаров
             $totalPrice = Cart::getTotalPrice($products);
         }
@@ -27,32 +28,32 @@ class CartController {
         $smarty->assign('totalPrice', $totalPrice);
         $smarty->display(ROOT.'/views/cart/index.tpl');
 
-		return true;
-	}
+        return true;
+    }
 
-	public function actionAdd($id) {
+    public function actionAdd($id) {
         // Добавляем товар в корзину
         Cart::addProduct($id);
     }
-    
+
     public function actionDecrease($id) {
         // Добавляем товар в корзину
         Cart::decreaseProduct($id);
     }
 
     public function actionDelete($id) {
-    // Удаляем заданный товар из корзины
+        // Удаляем заданный товар из корзины
         Cart::deleteProducts($id);
     }
-    
-	public function actionClear() {
-    // Удаляем все товары из корзины
+
+    public function actionClear() {
+        // Удаляем все товары из корзины
         Cart::clear();
-	}
+    }
 
-	public function actionPayment() {
+    public function actionPayment() {
 
-		$productsInCart = Cart::getProducts();
+        $productsInCart = Cart::getProducts();
 
         // Если товаров нет, отправляем пользователи искать товары на главную
         if ($productsInCart == false) {
@@ -60,11 +61,11 @@ class CartController {
         }
         // Берем список продуктов
         $productsIds = array_keys($productsInCart);
-        $products = Product::getProdustsByIds($productsIds);
+//        $products = Product::getProdustsByIds($productsIds);
 
         // Находим общую стоимость
         $productsIds = array_keys($productsInCart);
-        $products = Product::getProdustsByIds($productsIds);
+//        $products = Product::getProdustsByIds($productsIds);
         $totalPrice = Cart::getTotalPrice($products);
 
         // Количество товаров
@@ -128,10 +129,10 @@ class CartController {
         $image = $captcha->inline();
         $_SESSION['captcha'] = $captcha->getPhrase();
 
-		require_once(ROOT . '/views/cart/payment.php');
+        require_once(ROOT . '/views/cart/payment.php');
 
 
-		return true;
-	}
+        return true;
+    }
 }
 
