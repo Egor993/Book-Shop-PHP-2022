@@ -19,6 +19,8 @@ require_once(ROOT.'/application/app/Models/Database.php');
 require_once(ROOT . '/application/app/Models/BaseModel.php');
 require_once(ROOT . '/application/app/Models/Products.php');
 
+//require_once(ROOT . '/entries/CartEntry.php');
+
 // 3. Установка соединения с БД
 
 use Models\Database;

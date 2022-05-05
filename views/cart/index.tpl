@@ -54,7 +54,7 @@
 					</div>
 					<div style="flex:1"><p data-cost='{$product->id}'>{$productsInCart[$product->id] * $product->price} руб</p></div>
 					<div style="flex:1">
-						<p data-delete='{$product->id}'><img class="chg-quantity update-cart" src="/template/images/delete.png"></p>
+						<p class='delete' data-order='{$product->id}'><img class="chg-quantity update-cart" src="/template/images/delete.png"></p>
 						</a>
 					</div>
 				</div>
@@ -62,4 +62,6 @@
 		</div>
 	</div>
 </div>
+<h1 id="test1">Тестовое поле</h1>
+
 <script src="/template/js/cart.js"></script>

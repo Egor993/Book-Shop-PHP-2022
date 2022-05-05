@@ -2,34 +2,31 @@
 
 use Models\Products;
 
+$totalPrice = 0;
+$products = [];
+
+// Получаемм данные из корзины
+$productsInCart = Cart::getProducts();
+
+if ($productsInCart) {
+    // Получаем полную информацию о товарах для списка
+    $productsIds = array_keys($productsInCart);
+    $products = Products::whereIn('id', $productsIds)->get();
+
+    // Получаем общую стоимость товаров
+    $totalPrice = Cart::getTotalPrice($products);
+}
+
+$smarty = new Smarty();
+$smarty->assign('products', $products);
+$smarty->assign('productsInCart', $productsInCart);
+$smarty->assign('totalProducts', count($products));
+$smarty->assign('totalPrice', $totalPrice);
+$smarty->display(ROOT.'/views/cart/index.tpl');
+
 class CartController {
 
-    public function actionIndex() {
 
-        $totalPrice = 0;
-        $products = [];
-
-        // Получаемм данные из корзины
-        $productsInCart = Cart::getProducts();
-
-        if ($productsInCart) {
-            // Получаем полную информацию о товарах для списка
-            $productsIds = array_keys($productsInCart);
-            $products = Products::whereIn('id', $productsIds)->get();
-
-            // Получаем общую стоимость товаров
-            $totalPrice = Cart::getTotalPrice($products);
-        }
-
-        $smarty = new Smarty();
-        $smarty->assign('products', $products);
-        $smarty->assign('productsInCart', $productsInCart);
-        $smarty->assign('totalProducts', count($products));
-        $smarty->assign('totalPrice', $totalPrice);
-        $smarty->display(ROOT.'/views/cart/index.tpl');
-
-        return true;
-    }
 
     public function actionAdd($id) {
         // Добавляем товар в корзину
