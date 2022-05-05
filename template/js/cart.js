@@ -1,12 +1,29 @@
 $(document).ready(function() {
-	$('.delete').click(function(event){
-		let chosen = $(this);
-		let id = chosen.attr('data-order');
+	$('.clear').click(function(e) {
+		e.preventDefault()
 		debugger;
 		$.ajax({
 			type: "POST",
 			url: "/cart",
-			data: 'id='+ id + '&action=deleteItem',
+			data: 'action=clearOrders',
+			success: function() {
+				$('.cart-row').remove()
+				changeData('clear')
+			},
+			error: function (error) {
+				console.error(error);
+			}
+		});
+	});
+
+	$('.delete').click(function(e) {
+		let chosen = $(this),
+			id = chosen.attr('data-order');
+
+		$.ajax({
+			type: "POST",
+			url: "/cart",
+			data: 'id='+ id + '&action=deleteOrder',
 			success: function(){
 				chosen.parents('.cart-row').remove()
 			},
@@ -16,21 +33,45 @@ $(document).ready(function() {
 		});
 	});
 
-	let myQuote = $('#test1');
-	myQuote.click(function(){
-		myQuote.text('123');
-		// $.ajax({
-		// 	type: "POST",
-		// 	url: "/index.php",
-		// 	data: '123',
-		// 	success: function(html){
-		// 		console.log(html);
-		// 	},
-		// 	error   : function (error) {
-		// 		console.error(error);
-		// 	}
-		// });
+	$('.chg-quantity').click(function(e) {
+		let chosen = $(this),
+			id = chosen.attr('data-id'),
+			action = chosen.attr('data-action')
+
+		$.ajax({
+			type: "POST",
+			url: "/cart",
+			data: 'id='+ id + '&action='+ action,
+			success: function(){
+				changeData(action, id)
+			},
+			error: function (error) {
+				console.error(error);
+			}
+		});
 	})
+
+	function changeData(option, id = null) {
+		let totalProducts = $('.total-products'),
+			totalPrice = $('.total-price'),
+			count;
+		if (id !== null) {
+			count = $(".count[data-id='" + id +"']");
+		}
+
+		switch(option) {
+			case 'clear':
+				totalPrice.text(' 0 ');
+				totalProducts.text(' 0 ');
+				break;
+			case 'addProduct':
+				count.text(parseInt(count.text()) + 1);
+				break
+			case 'decreaseProduct':
+				count.text(parseInt(count.text()) - 1);
+				break;
+		}
+	}
 })
 
 //

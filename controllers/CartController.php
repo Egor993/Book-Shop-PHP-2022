@@ -2,6 +2,24 @@
 
 use Models\Products;
 
+if (isset($_POST['action'])) {
+    switch ($_POST['action']) {
+        case 'clearOrders':
+            Cart::clear();
+            break;
+        case 'deleteOrder':
+            Cart::deleteProducts($_POST['id']);
+            break;
+        case 'addProduct':
+            Cart::addProduct($_POST['id']);
+            break;
+        case 'decreaseProduct':
+            Cart::decreaseProduct($_POST['id']);;
+            break;
+    }
+}
+
+
 $totalPrice = 0;
 $products = [];
 
@@ -23,6 +41,17 @@ $smarty->assign('productsInCart', $productsInCart);
 $smarty->assign('totalProducts', count($products));
 $smarty->assign('totalPrice', $totalPrice);
 $smarty->display(ROOT.'/views/cart/index.tpl');
+
+
+
+
+
+
+
+
+
+
+
 
 class CartController {
 

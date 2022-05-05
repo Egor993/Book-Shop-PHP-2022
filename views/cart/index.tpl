@@ -7,11 +7,11 @@
 			<br>
 			<table class="table">
 				<tr>
-					<th><h5 data-total>Товаров: <strong>{$totalProducts}</strong></h5></th>
-					<th><h5 data-total-cost>Общая стоимость:<strong> {$totalPrice} руб</strong></h5></th>
+					<th style="font-size:18px;">Товаров: <span class="total-products">{$totalProducts}</span></th>
+					<th style="font-size:18px;">Общая стоимость:<span class="total-price"> {$totalPrice} </span>руб </th>
 					<th>
 						<a style="float:right; margin:5px;" class="btn btn-success" href="../../../index.php" autofocus>Оплата</a>
-						<a  style="float:right; margin:5px;" class="btn btn-secondary" href="cart/clear">Очистить</a>
+						<a  style="float:right; margin:5px;" class="btn btn-secondary clear" href="#">Очистить</a>
 					</th>
 				</tr>
 			</table>
@@ -42,14 +42,12 @@
 						</p>
 					</div>
 					<div style="flex:1">
-						<p class="quantity" data-qty='{$product->id}'>
-							{$productsInCart[$product->id]}шт.
+						<p class="quantity">
+							<span class="count" data-id='{$product->id}'>{$productsInCart[$product->id]}</span>шт.
 						</p>
 						<div class="quantity">
-							<img data-add class="chg-quantity update-cart" src="/template/images/arrow-up.png" data-id='{$product->id}'>
-							<a href="/cart/decrease/{$product->id}" >
-								<img data-decrease class="chg-quantity update-cart" src="/template/images/arrow-down.png" data-id='{$product->id}'>
-							</a>
+							<img data-action="addProduct" data-id='{$product->id}' class="chg-quantity update-cart" src="/template/images/arrow-up.png">
+							<img data-action="decreaseProduct" data-id='{$product->id}' class="chg-quantity update-cart" src="/template/images/arrow-down.png">
 						</div>
 					</div>
 					<div style="flex:1"><p data-cost='{$product->id}'>{$productsInCart[$product->id] * $product->price} руб</p></div>
@@ -62,6 +60,5 @@
 		</div>
 	</div>
 </div>
-<h1 id="test1">Тестовое поле</h1>
 
 <script src="/template/js/cart.js"></script>

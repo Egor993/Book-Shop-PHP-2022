@@ -1,8 +1,5 @@
 {
  "require": {
 	"illuminate/database": "8.44.0"
- },
- "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.10"
  }
 }
