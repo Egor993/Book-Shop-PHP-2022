@@ -5,8 +5,7 @@ return [
 	'register' => 'register/',
 	'login' => 'login/',
 
-	'profile/edit' => 'profile/edit',
-	'profile' => 'profile/index',
+	'profile' => 'profile/',
 
 	'cart' => 'cart/',
 
@@ -14,5 +13,4 @@ return [
 
 	'logout' => 'logout/',
 	'' => 'site/',
-	
-	];
+];

@@ -106,7 +106,7 @@ class User {
         return false;
     }
 
-    public static function isGuest()
+    public static function isGuest(): bool
     {
         if (isset($_SESSION['user'])) {
             return false;
@@ -114,7 +114,8 @@ class User {
         return true;
     }
     
-    public static function checkName($name) {
+    public static function checkName($name): bool
+    {
         if (strlen($name) >= 2) {
             return true;
         }

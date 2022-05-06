@@ -51,12 +51,12 @@ if (isset($_POST['submit'])) {
         $result = true;
     }
 }
+
 $smarty = new Smarty();
 $smarty->assign('result', $result);
 $smarty->assign('name', $name);
 $smarty->assign('email', $email);
 $smarty->assign('errors', $errors);
-
 $smarty->display(ROOT.'/views/user/register.tpl');
 
 class RegisterController {

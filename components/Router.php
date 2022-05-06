@@ -54,14 +54,16 @@ class Router
 					include_once($controllerFile);
 				}
 
-				$controllerObject = new $controllerName;
-				/*$result = $controllerObject->$actionName($parameters); - OLD VERSION */
-				/*$result = call_user_func(array($controllerObject, $actionName), $parameters);*/
-				$result = call_user_func_array(array($controllerObject, $actionName), $urlParameters);
+				break;
 
-				if ($result != null) {
-					break;
-				}
+//				$controllerObject = new $controllerName;
+//				/*$result = $controllerObject->$actionName($parameters); - OLD VERSION */
+//				/*$result = call_user_func(array($controllerObject, $actionName), $parameters);*/
+//				$result = call_user_func_array(array($controllerObject, $actionName), $urlParameters);
+//
+//				if ($result != null) {
+//					break;
+//				}
 			}
 
 		}
