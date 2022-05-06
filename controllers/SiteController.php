@@ -28,12 +28,18 @@ $productsOnPage = $productsQuery
 
 $genres = GenresList::getGenresList();
 
+$latestProducts = Products::query()
+    ->orderBy('id', 'desc')
+    ->limit(3)
+    ->get();
+
 $smarty = new Smarty();
 $smarty->assign('products', $productsOnPage);
 $smarty->assign('totalPages', $totalPages);
 $smarty->assign('genres', $genres);
 $smarty->assign('genre', $genre);
 $smarty->assign('search', $search);
+$smarty->assign('latestProducts', $latestProducts);
 $smarty->display(ROOT.'/views/site/index.tpl');
 
 
