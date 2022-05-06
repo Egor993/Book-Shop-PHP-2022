@@ -58,12 +58,12 @@
                                 <div class="col-md-3">
                                     <div class="product-shoe-info editContent text-center mt-lg-4" >
                                         <div class="men-thumb-item">
-                                            <a href="product/{$product->id}" class="editContent" >
+                                            <a href="product?id={$product->id}" class="editContent" >
                                             <img src="/template/images/{$product->image}"  class="img-fluid-main">
                                         </div>
                                         <div class="item-info-product">
                                             <h4>
-                                                <a href="product/{$product->id}">{$product->name}</a>
+                                                <a href="product?id={$product->id}">{$product->name}</a>
                                             </h4>
                                             <h6>
                                                 {$product->price} руб

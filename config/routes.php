@@ -1,6 +1,6 @@
 <?php
 return [
-	'product/([0-9]+)' => 'product/view/$1',
+	'product' => 'product/',
 
 	'register' => 'user/register',
 	'login' => 'user/login',
@@ -13,6 +13,6 @@ return [
 	'payment' => 'cart/payment',
 
 	'exit' => 'user/exit', 
-	'' => 'site/index', 
+	'' => 'site/',
 	
 	];

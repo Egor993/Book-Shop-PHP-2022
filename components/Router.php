@@ -47,7 +47,7 @@ class Router
 
 				$actionName = 'action'.ucfirst(array_shift($segments));
 
-                $parameters = $segments;
+                $urlParameters = $segments;
 
 				$controllerFile = ROOT . '/controllers/' .$controllerName. '.php';
 				if (file_exists($controllerFile)) {
@@ -57,7 +57,7 @@ class Router
 				$controllerObject = new $controllerName;
 				/*$result = $controllerObject->$actionName($parameters); - OLD VERSION */
 				/*$result = call_user_func(array($controllerObject, $actionName), $parameters);*/
-				$result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+				$result = call_user_func_array(array($controllerObject, $actionName), $urlParameters);
 
 				if ($result != null) {
 					break;

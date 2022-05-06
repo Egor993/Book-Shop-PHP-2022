@@ -1,6 +1,19 @@
 <?php
 
-include_once ROOT. '/models/Product.php';
+use Models\Products;
+
+$id = ($_GET['id']) ?? header('Location: /');
+$genres = GenresList::getGenresList();
+$latestProducts = Products::getLatestProducts();
+$product = Products::where('id', $id)->first();
+$genre = $genres[$product->genre];
+
+$smarty = new Smarty();
+$smarty->assign('product', $product);
+$smarty->assign('genres', $genres);
+$smarty->assign('genre', $genre);
+$smarty->assign('latestProducts', $latestProducts);
+$smarty->display(ROOT.'/views/product/index.tpl');
 
 class ProductController {
 
@@ -52,7 +65,7 @@ class ProductController {
 		
         $viewproduct = Product::getProductById($id);
         
-		require_once(ROOT . '/views/product/index.php');
+		require_once(ROOT . '/views/product/index.tpl');
 
 
 		return true;

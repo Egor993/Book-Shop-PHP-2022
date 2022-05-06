@@ -28,10 +28,7 @@ $productsOnPage = $productsQuery
 
 $genres = GenresList::getGenresList();
 
-$latestProducts = Products::query()
-    ->orderBy('id', 'desc')
-    ->limit(3)
-    ->get();
+$latestProducts = Products::getLatestProducts();
 
 $smarty = new Smarty();
 $smarty->assign('products', $productsOnPage);

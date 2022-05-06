@@ -18,7 +18,7 @@ class Pagination
         $this->totalEntries = $totalEntries;
     }
 
-    public function getTotalPages()
+    public function getTotalPages(): array
     {
         $pages = [];
         $countPages = ceil($this->totalEntries / self::LIMIT);
