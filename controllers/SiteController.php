@@ -8,14 +8,12 @@ $genre = $_GET['genre'] ?? '';
 $productsQuery = Products::query();
 
 if ($genre) {
-    $productsQuery
-        ->where('genre', $genre);
+    $productsQuery->where('genre', $genre);
 }
 
 $search = $_GET['search'] ?? '';
 if ($search) {
-    $productsQuery
-        ->where('name', 'LIKE', "%{$search}%");
+    $productsQuery->where('name', 'LIKE', "%{$search}%");
 }
 
 $pagination = new Pagination($totalEntries = count($productsQuery->get()));

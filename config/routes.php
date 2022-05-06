@@ -2,17 +2,17 @@
 return [
 	'product' => 'product/',
 
-	'register' => 'user/register',
-	'login' => 'user/login',
+	'register' => 'register/',
+	'login' => 'login/',
 
 	'profile/edit' => 'profile/edit',
 	'profile' => 'profile/index',
 
-	'cart' => 'cart/index',
+	'cart' => 'cart/',
 
 	'payment' => 'cart/payment',
 
-	'exit' => 'user/exit', 
+	'logout' => 'logout/',
 	'' => 'site/',
 	
 	];

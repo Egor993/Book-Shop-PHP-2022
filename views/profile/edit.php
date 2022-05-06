@@ -1,4 +1,4 @@
-<?php include ROOT.'/views/include/header.php'; ?>
+<?php include ROOT . '/views/include/header.tpl'; ?>
 <link rel="stylesheet" href="/template/css/profile.css" type="text/css" media="all">
 
 <div class="container emp-profile">

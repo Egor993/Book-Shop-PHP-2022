@@ -1,4 +1,4 @@
-<?php include ROOT.'/views/include/header.php'; ?>
+<?php include ROOT . '/views/include/header.tpl'; ?>
 
 <form action="#" method="post">
  <div class="row">

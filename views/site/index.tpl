@@ -1,5 +1,5 @@
 
-{include file="{ROOT}/views/include/header.php"}
+{include file="{ROOT}/views/include/header.tpl"}
 
         </div>
         <ol class="breadcrumb editContent">

@@ -37,13 +37,14 @@
                             <li><a href="/">Главная</a></li>
                             <li><a href="#">О магазине</a></li>
                             <li><a href="#">Контакты</a></li>
-                            <?php if (!isset($_SESSION['user'])): ?>
-                            <li><a href="/register">Регистрация</a></li>
-                            <li><a href="/login">Вход</a></li>
-                            <?php else: ?>
-                            <li><a href="/profile">Профиль</a></li>
-                            <?php endif; ?>
-                            <li><a href="/cart"><img src="/template/images/full-cart-light.png" height="40" alt=""/></a></li>
+                            {if User::isGuest()}
+                                <li><a href="/register/">Регистрация</a></li>
+                                <li><a href="/login/">Вход</a></li>
+                            {else}
+                                <li><a href="/profile/">Профиль</a></li>
+                                <li><a href="/logout/">Выход</a></li>
+                            {/if}
+                            <li><a href="/cart/"><img src="/template/images/full-cart-light.png" height="40" alt=""/></a></li>
                             <span id='cart-count'><?php echo Cart::countItems(); ?></span>
                         </ul>
                     </nav>
