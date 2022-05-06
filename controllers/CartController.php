@@ -55,7 +55,9 @@ $smarty->display(ROOT.'/views/cart/index.tpl');
 
 class CartController {
 
+    public function actionIndex() {
 
+    }
 
     public function actionAdd($id) {
         // Добавляем товар в корзину

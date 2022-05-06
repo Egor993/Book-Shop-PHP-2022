@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 	$('.clear').click(function(e) {
 		e.preventDefault()
 		debugger;

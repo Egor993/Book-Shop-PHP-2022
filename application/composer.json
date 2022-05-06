@@ -1,5 +1,5 @@
 {
  "require": {
-	"illuminate/database": "8.44.0"
+	"laravel/framework": "^8.44.0"
  }
 }
