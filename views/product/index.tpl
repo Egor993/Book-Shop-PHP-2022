@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <link rel="stylesheet" href="/template/css/bootstrap.css">
 
     <link rel="stylesheet" href="/template/css/style.css" type="text/css" media="all">
@@ -16,6 +18,10 @@
 </head>
 
 <body>
+
+<div class="action-notification" style="display: none">
+    <div id="check-mark"></div> Товар успешно добавлен в корзину
+</div>
 
 <div id="page" class="page">
     <div class="main-banner inner bg bg1" id="home">
@@ -36,14 +42,15 @@
                             <li><a href="/">Главная</a></li>
                             <li><a href="#">О магазине</a></li>
                             <li><a href="#">Контакты</a></li>
-                            <?php if (!isset($_SESSION['user'])): ?>
-                            <li><a href="/register">Регистрация</a></li>
-                            <li><a href="/login">Вход</a></li>
-                            <?php else: ?>
-                            <li><a href="/profile">Профиль</a></li>
-                            <?php endif; ?>
+                            {if App\Components\User::isGuest()}
+                                <li><a href="/register/">Регистрация</a></li>
+                                <li><a href="/login/">Вход</a></li>
+                            {else}
+                                <li><a href="/profile/">Профиль</a></li>
+                                <li><a href="/logout/">Выход</a></li>
+                            {/if}
                             <li><a href="/cart"><img src="/template/images/full-cart-light.png" height="40" alt=""/></a></li>
-                            <span id='cart-count'><?php echo Cart::countItems(); ?></span>
+                            <span id='cart-count'>{App\Components\Cart::countItems()}</span>
                         </ul>
                 </nav>
                 <!-- //nav -->
@@ -98,7 +105,7 @@
                             {foreach $latestProducts as $product}
                                 <div class="special-sec1 row mt-3 editContent" >
                                     <div class="img-deals col-md-4">
-                                        <a href="/product/{$product->id}">
+                                        <a href="/product?id={$product->id}">
                                             <img src="/template/images/{$product->image}" class="img-fluid" alt="" >
                                     </div>
                                     <div class="img-deal1 col-md-8">
@@ -244,6 +251,12 @@
     </section>
     <!-- //contact -->
     <!-- footer -->
-   <?php include ROOT.'/views/include/footer.php'; ?>
+{include file="{ROOT}/views/include/footer.php"}
 
 </body>
+
+<script>
+    if (parseInt($('#cart-count').text()) === 0) {
+        $('#cart-count').hide();
+    }
+</script>

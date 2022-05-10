@@ -1,6 +1,10 @@
 
 {include file="{ROOT}/views/include/header.tpl"}
 
+<div class="action-notification" style="display: none">
+   <div id="check-mark"></div> Товар успешно добавлен в корзину
+</div>
+
         </div>
         <ol class="breadcrumb editContent">
             <li class="breadcrumb-item">
@@ -39,7 +43,7 @@
                             {foreach $latestProducts as $product}
                                 <div class="special-sec1 row mt-3 editContent" >
                                     <div class="img-deals col-md-4">
-                                        <a href="/product/{$product->id}">
+                                        <a href="/product?id={$product->id}">
                                         <img src="/template/images/{$product->image}" class="img-fluid" alt="" >
                                     </div>
                                     <div class="img-deal1 col-md-8">

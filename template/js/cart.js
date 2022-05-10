@@ -2,7 +2,6 @@ $(document).ready(function() {
 
 	$('.clear').click(function(e) {
 		e.preventDefault()
-		debugger;
 		$.ajax({
 			type: "POST",
 			url: "/cart",
@@ -26,7 +25,7 @@ $(document).ready(function() {
 			url: "/cart",
 			data: 'id='+ id + '&action=deleteOrder',
 			success: function(){
-				chosen.parents('.cart-row').remove()
+				changeData('delete', id)
 			},
 			error: function (error) {
 				console.error(error);
@@ -55,23 +54,56 @@ $(document).ready(function() {
 	function changeData(option, id = null) {
 		let totalProducts = $('.total-products'),
 			totalPrice = $('.total-price'),
-			count;
+			cartCount = $('#cart-count'),
+			count,
+			price,
+			computedPrice;
 		if (id !== null) {
 			count = $(".count[data-id='" + id +"']");
+			price = parseInt($(".price[data-id='" + id +"']").text());
+			computedPrice = $(".computed-price[data-id='" + id +"']");
 		}
 
 		switch(option) {
 			case 'clear':
-				totalPrice.text(' 0 ');
-				totalProducts.text(' 0 ');
+				clearGeneralInfo()
+				break;
+			case 'delete':
+				totalPrice.text(parseInt(totalPrice.text()) - price)
+				totalProducts.text(parseInt(totalProducts.text()) - 1)
+				$(".product[data-order='" + id +"']").remove();
+				if (!$('.product').text()) {
+					clearGeneralInfo()
+				}
 				break;
 			case 'addProduct':
+				computedPrice.text(parseInt(computedPrice.text()) + price);
 				count.text(parseInt(count.text()) + 1);
+				totalPrice.text(parseInt(totalPrice.text()) + price)
+				totalProducts.text(parseInt(totalProducts.text()) + 1)
+				cartCount.text(parseInt(cartCount.text()) + 1)
 				break
 			case 'decreaseProduct':
+				computedPrice.text(+computedPrice.text() - price);
 				count.text(parseInt(count.text()) - 1);
+				totalPrice.text(parseInt(totalPrice.text()) - price)
+				totalProducts.text(parseInt(totalProducts.text()) + -1)
+				cartCount.text(parseInt(cartCount.text()) - 1)
+				if (parseInt(count.text()) === 0) {
+					$(".product[data-order='" + id +"']").remove();
+					if (!$('.product').text()) {
+						clearGeneralInfo()
+					}
+				}
+
 				break;
 		}
+	}
+	function clearGeneralInfo() {
+		$('.information-fields').hide();
+		$('.total-price').text(0);
+		$('.total-products').text(0);
+		$('#cart-count').hide();
 	}
 })
 

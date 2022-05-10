@@ -45,7 +45,7 @@
                                 <li><a href="/logout/">Выход</a></li>
                             {/if}
                             <li><a href="/cart/"><img src="/template/images/full-cart-light.png" height="40" alt=""/></a></li>
-                            <span id='cart-count'><?php echo Cart::countItems(); ?></span>
+                            <span id='cart-count'>{App\Components\Cart::countItems()}</span>
                         </ul>
                     </nav>
                     <!-- /nav -->
@@ -67,3 +67,9 @@
     </div>
 
 </body>
+
+<script>
+    if (parseInt($('#cart-count').text()) === 0) {
+        $('#cart-count').hide();
+    }
+</script>

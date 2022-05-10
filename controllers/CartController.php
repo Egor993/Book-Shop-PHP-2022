@@ -38,10 +38,12 @@ if ($productsInCart) {
     $totalPrice = Cart::getTotalPrice($products);
 }
 
+$totalProducts = $productsInCart ? array_sum($productsInCart) : 0;
+
 $smarty = new Smarty();
 $smarty->assign('products', $products);
 $smarty->assign('productsInCart', $productsInCart);
-$smarty->assign('totalProducts', count($products));
+$smarty->assign('totalProducts', $totalProducts);
 $smarty->assign('totalPrice', $totalPrice);
 $smarty->display(ROOT.'/views/cart/index.tpl');
 

@@ -9,7 +9,7 @@ use App\Components\User;
 
 $productsInCart = Cart::getProducts();
 $errors = [];
-$user = isset($_SESSION['user']) ?? Users::where('name', $_SESSION['user'])->first();
+$user = isset($_SESSION['user']) ? Users::where('name', $_SESSION['user'])->first() : "";
 $userName = "";
 $userPhone = "";
 $userComment = "";

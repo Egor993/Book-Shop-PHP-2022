@@ -1,36 +1,35 @@
-"use strict";
-
-$('.buybtn').click(function(e) {
-	e.preventDefault();
-	let id = $(this).attr('data-id');
-	debugger;
-	$.ajax({
-		type: "POST",
-		url: "/cart",
-		data: 'id='+ id + '&action=addProduct',
-		success: function(){
-			$('#cart-count').text(1);
-		},
-		error: function (error) {
-			console.error(error);
+$(function() {
+	$('.buybtn').click(function (e) {
+		e.preventDefault();
+		loadNotification()
+		let cartCount = parseInt($('#cart-count').text());
+		$('#cart-count').text(cartCount + 1);
+		if (cartCount === 0) {
+			$('#cart-count').show();
 		}
-	});
-})
+		let id = $(this).attr('data-id');
+		$.ajax({
+			type: "POST",
+			url: "/cart",
+			data: 'id=' + id + '&action=addProduct',
+			error: function (error) {
+				console.error(error);
+			}
+		});
+	})
 
-// const addToCart = document.querySelectorAll('.buybtn');
-// const cartCount = document.querySelector('#cart-count');
-//
-// addToCart.forEach((item) => {
-// 	item.addEventListener('click', (e) => {
-// 		e.preventDefault();
-// 		let id = (item.getAttribute('data-id'));
-// 		fetch('/cart/add/'+id, {
-// 			method: 'POST'
-// 		})
-// 		  .then(response => {
-// 			cartCount.innerHTML++;
-// 		  })
-// 		  .catch(error => console.error(error));
-// 	});
-// });
-//
+	function loadNotification() {
+		$('.action-notification').css('top', '10px');
+		$('.action-notification').show();
+		$('.action-notification').animate({
+			"top": "110px"
+		}, 150, "linear");
+		setTimeout(function() {
+			$('.action-notification').animate({
+				"top": "0px"
+			}, 150, "linear", function () {
+				$('.action-notification').hide();
+			})
+		}, 3000);
+	}
+})
