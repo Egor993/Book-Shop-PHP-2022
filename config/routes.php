@@ -6,6 +6,7 @@ return [
 	'login' => 'login/',
 
 	'profile' => 'profile/',
+    'profile/edit' => 'profile/',
 
 	'cart' => 'cart/',
 
