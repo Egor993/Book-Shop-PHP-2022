@@ -160,7 +160,7 @@ class CartController {
         $image = $captcha->inline();
         $_SESSION['captcha'] = $captcha->getPhrase();
 
-        require_once(ROOT . '/views/cart/payment.tpl');
+        require_once(ROOT . '/views/cart/index.tpl');
 
 
         return true;
