@@ -1,4 +1,4 @@
-<?php include ROOT . '/views/include/header.tpl'; ?>
+{include file="{ROOT}/views/include/header.tpl"}
 
 <form action="#" method="post">
  <div class="row">
@@ -27,7 +27,7 @@
 
 				<hr>
 				<div class="form-field">
-                   <img src="<?php echo $image; ?>" height="50">
+                   <img src="{$captchaImage}" height="50">
                 </div>
                     <div class="form-field">
                         <input name="code" type="text" class="form-control" id="code" placeholder="Капча...">
@@ -53,16 +53,16 @@
 			<hr>
 			<h3>Общая информация</h3>
 			<hr>
-			<?php foreach ($products as $product): ?>
+			{foreach $products as $product}
 				<div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="template/images/<?php echo $product['image']?>"></div>
-					<div style="flex:2"><a href="/book_list/krestnyj-otec/"><?php echo $product['name']; ?></a></div>
-					<div style="flex:1"><p><?php echo $product['price']; ?> руб</p></div>
-					<div style="flex:1"><p>x<?php echo $productsInCart[$product['id']]; ?> шт</p></div>
+					<div style="flex:2"><img class="row-image" src="/template/images/{$product->image}"></div>
+					<div style="flex:2"><a href="/product?id={$product->id}">{$product->name}</a></div>
+					<div style="flex:1"><p>{$product->price} руб</p></div>
+					<div style="flex:1"><p>x{$productsInCart[$product->id]} шт</p></div>
 				</div>
-			<?php endforeach; ?>
-			<h5>Кол-во: <?php echo $totalQuantity; ?></h5>
-			<h5>Общая стоимость: <?php echo $totalPrice; ?> руб</h5>
+			{/foreach}
+			<h5>Кол-во: {$totalQuantity}</h5>
+			<h5>Общая стоимость: {$totalPrice} руб</h5>
 		</div>
 	</div>
 </div>

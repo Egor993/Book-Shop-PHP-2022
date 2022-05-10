@@ -1,6 +1,8 @@
 <?php
 
-use Models\Users;
+use App\Models\Users;
+use App\Components\User;
+use App\Components\Image;
 
 if (User::isGuest()) {
     header("Location: /login");

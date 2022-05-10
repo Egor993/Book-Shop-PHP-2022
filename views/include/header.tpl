@@ -37,7 +37,7 @@
                             <li><a href="/">Главная</a></li>
                             <li><a href="#">О магазине</a></li>
                             <li><a href="#">Контакты</a></li>
-                            {if User::isGuest()}
+                            {if App\Components\User::isGuest()}
                                 <li><a href="/register/">Регистрация</a></li>
                                 <li><a href="/login/">Вход</a></li>
                             {else}

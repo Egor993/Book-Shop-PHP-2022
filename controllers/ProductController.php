@@ -1,6 +1,7 @@
 <?php
 
-use Models\Products;
+use App\Models\Products;
+use App\Components\GenresList;
 
 $id = ($_GET['id']) ?? header('Location: /');
 $genres = GenresList::getGenresList();

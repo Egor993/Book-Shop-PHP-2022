@@ -1,6 +1,7 @@
 <?php
 
-use Models\Users;
+use App\Models\Users;
+use App\Components\User;
 
 $name = '';
 $password = '';

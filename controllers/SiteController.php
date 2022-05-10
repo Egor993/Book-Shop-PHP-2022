@@ -1,6 +1,8 @@
 <?php
 
-use Models\Products;
+use App\Models\Products;
+use App\Components\Pagination;
+use App\Components\GenresList;
 
 $page = $_GET['page'] ?? 1;
 $genre = $_GET['genre'] ?? '';

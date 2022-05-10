@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Components;
+
 class Router
 {
 

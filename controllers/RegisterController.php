@@ -1,6 +1,7 @@
 <?php
 
-use Models\Users;
+use App\Models\Users;
+use App\Components\User;
 
 $name = '';
 $email = '';
@@ -40,12 +41,12 @@ if (isset($_POST['submit'])) {
     }
 
     if (!$errors) {
-        $user = new Users();
-        $user->name = $name;
-        $user->email = $email;
-        $user->password = $password1;
-        $user->role = $role;
-        $user->save();
+        $user = Users::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password1,
+            'role' => $role,
+        ]);
 
         User::auth($name);
         $result = true;

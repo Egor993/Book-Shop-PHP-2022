@@ -10,7 +10,7 @@
 					<th style="font-size:18px;">Товаров: <span class="total-products">{$totalProducts}</span></th>
 					<th style="font-size:18px;">Общая стоимость:<span class="total-price"> {$totalPrice} </span>руб </th>
 					<th>
-						<a style="float:right; margin:5px;" class="btn btn-success" href="../../../index.php" autofocus>Оплата</a>
+						<a style="float:right; margin:5px;" class="btn btn-success" href="/payment/" autofocus>Оплата</a>
 						<a  style="float:right; margin:5px;" class="btn btn-secondary clear" href="#">Очистить</a>
 					</th>
 				</tr>

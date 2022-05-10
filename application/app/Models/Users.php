@@ -1,11 +1,13 @@
 <?php
 
-namespace Models;
-use Models\BaseModel;
+namespace App\Models;
+use App\Models\BaseModel;
 
 class Users extends BaseModel
 {
     protected $table = "user";
+
+    protected $guarded = [];
 
     public static function isNameExists($name): bool
     {

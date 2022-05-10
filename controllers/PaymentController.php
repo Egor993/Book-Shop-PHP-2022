@@ -1,49 +1,33 @@
 <?php
 
-use App\Components\Cart;
-use App\Components\User;
 use App\Models\Products;
+use App\Components\Cart;
+use App\Components\Captcha;
 
-
-if (isset($_POST['action'])) {
-    switch ($_POST['action']) {
-        case 'clearOrders':
-            Cart::clear();
-            break;
-        case 'deleteOrder':
-            Cart::deleteProducts($_POST['id']);
-            break;
-        case 'addProduct':
-            Cart::addProduct($_POST['id']);
-            break;
-        case 'decreaseProduct':
-            Cart::decreaseProduct($_POST['id']);;
-            break;
-    }
-}
-
-
-$totalPrice = 0;
-$products = [];
-
-// Получаемм данные из корзины
 $productsInCart = Cart::getProducts();
 
-if ($productsInCart) {
-    // Получаем полную информацию о товарах для списка
-    $productsIds = array_keys($productsInCart);
-    $products = Products::whereIn('id', $productsIds)->get();
-
-    // Получаем общую стоимость товаров
-    $totalPrice = Cart::getTotalPrice($products);
+// Если товаров нет, отправляем пользователи искать товары на главную
+if ($productsInCart == false) {
+    header("Location: /");
 }
+
+$products = Products::whereIn('id', array_keys($productsInCart))->get();
+
+$totalQuantity = Cart::countItems();
+$totalPrice = Cart::getTotalPrice($products);
+
+// Подключение капчи
+$captcha = Captcha::getCaptcha();
+$captchaImage = $captcha->inline();
+$_SESSION['captcha'] = $captcha->getPhrase();
 
 $smarty = new Smarty();
 $smarty->assign('products', $products);
-$smarty->assign('productsInCart', $productsInCart);
-$smarty->assign('totalProducts', count($products));
+$smarty->assign('totalQuantity', $totalQuantity);
 $smarty->assign('totalPrice', $totalPrice);
-$smarty->display(ROOT.'/views/cart/index.tpl');
+$smarty->assign('captchaImage', $captchaImage);
+$smarty->assign('productsInCart', $productsInCart);
+$smarty->display(ROOT.'/views/cart/payment.tpl');
 
 
 

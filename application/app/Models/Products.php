@@ -1,12 +1,11 @@
 <?php
 
-namespace Models;
-use Models\BaseModel;
+namespace App\Models;
+use App\Models\BaseModel;
 
 class Products extends BaseModel
 {
     protected $table = "product";
-
 
     public static function getLatestProducts(): \Illuminate\Database\Eloquent\Collection
     {

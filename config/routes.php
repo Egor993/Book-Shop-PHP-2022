@@ -9,7 +9,7 @@ return [
 
 	'cart' => 'cart/',
 
-	'payment' => 'cart/payment',
+	'payment' => 'payment/',
 
 	'logout' => 'logout/',
 	'' => 'site/',

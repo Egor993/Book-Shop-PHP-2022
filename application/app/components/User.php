@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Components;
+
 class User {
 
 //    public static function register($name, $email, $password, $role) {
