@@ -91,7 +91,7 @@
                                 {foreach $genres as $genre}
                                     <li class="editContent">
                                         <input type="checkbox" class="genre" id={$genre->id} {if in_array($genre->id, $selectedGenresArr)} checked="checked"{/if}>
-                                        {$genre->genre_name}
+                                        {$genre->name}
                                     </li>
                                 {/foreach}
                             </ul>
@@ -149,9 +149,9 @@
                                 <li style="list-style: none"><span><b>Жанры:</b>
                                         {foreach $productGenres as $key => $genre}
                                             {if $key == array_key_last($productGenres->toArray())}
-                                                {$genre->genre_name}
+                                                {$genre->name}
                                             {else}
-                                                {$genre->genre_name},
+                                                {$genre->name},
                                             {/if}
                                         {/foreach}
                                     </span>
