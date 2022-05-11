@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Products;
+use App\Models\Users;
+use App\Models\Comments;
 use App\Components\GenresList;
 
 $id = ($_GET['id']) ?? header('Location: /');
@@ -8,13 +10,47 @@ $genres = GenresList::getGenresList();
 $latestProducts = Products::getLatestProducts();
 $product = Products::where('id', $id)->first();
 $genre = $genres[$product->genre];
+$errors = [];
+
+// Если пользователь оставил комментарий, то записать это в сессию и установить комментарий для книги
+if (isset($_POST['submit'])) {
+    // Получаем экранированный комментарий от пользователя
+    $comment = htmlspecialchars($_POST['comment']);
+    if (strlen($comment) > 500) {
+        $errors[] = 'Вы превысили максимальное кол-во символов';
+    }
+    if (!$errors) {
+        // Получить данные пользователя для установки в БД комментария
+        $name = $_SESSION['user'];
+        $user = Users::where('name', $name)->first();
+        Comments::create([
+            'book_id' => $id,
+            'user_id' => $user->id,
+            'text' => $comment,
+        ]);
+    }
+}
+
+$comments = Comments::query()
+    ->leftJoin('user', 'user_id', '=', 'user.id')
+    ->where('book_id', '=', $id)
+    ->get();
 
 $smarty = new Smarty();
 $smarty->assign('product', $product);
+$smarty->assign('comments', $comments);
+$smarty->assign('errors', $errors);
 $smarty->assign('genres', $genres);
 $smarty->assign('genre', $genre);
 $smarty->assign('latestProducts', $latestProducts);
 $smarty->display(ROOT.'/views/product/index.tpl');
+
+
+
+
+
+
+
 
 class ProductController {
 

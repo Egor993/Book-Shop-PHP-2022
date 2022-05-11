@@ -198,51 +198,53 @@
                         <div class="single-form-left">
                             <!-- contact form grid -->
                             <div class="contact-single">
-                            <?php if(!(User::isGuest())): ?>
-                                <h3 class="editContent" style="outline: none; cursor: inherit;">
-                                    <span class="sub-tittle editContent"
-                                          style="outline: none; cursor: inherit;"></span>Оставить отзыв</h3>
-                            
-                                <form action="#" method="post" class="mt-4">
-                                    <div class="form-group editContent"
-                                         style="outline: none; cursor: inherit;">
-                                        <label for="contactcomment" class="editContent">Ваш комментарий</label>
-                                        <textarea class="form-control border" rows="10" cols="90" 
-                                                  id="contactcomment" required="" name='comment'></textarea>
-                                    </div>
-                                     <label for="contactcomment" class="editContent">Максимальная длина 500 символов *</label>
-	                                <?php if (isset($error)): ?>
-	                                <ul class="alert alert-danger">
-	                                    <li><?php echo $error; ?></li>
-	                                </ul>
-	                            	<?php endif;?>
-                                    <button type="submit" name="submit"
-                                            class="mt-3 btn btn-success btn-block py-3"
-                                            style="outline: none; cursor: inherit;">Отправить
-                                    </button>
-                                </form>
-                                <?php else: ?>
+                                {if !App\Components\User::isGuest()}
+                                    <h3 class="editContent" style="outline: none; cursor: inherit;">
+                                        <span class="sub-tittle editContent"
+                                              style="outline: none; cursor: inherit;"></span>Оставить отзыв</h3>
+
+                                    <form action="#" method="post" class="mt-4">
+                                        <div class="form-group editContent"
+                                             style="outline: none; cursor: inherit;">
+                                            <label for="contactcomment" class="editContent">Ваш комментарий</label>
+                                            <textarea class="form-control border" rows="10" cols="90"
+                                                      id="contactcomment" required="" name='comment'></textarea>
+                                        </div>
+                                         <label for="contactcomment" class="editContent">Максимальная длина 500 символов *</label>
+                                        {if $errors}
+                                            <ul class="alert alert-danger">
+                                                {foreach $errors as $error}
+                                                <li>{$error}</li>
+                                                {/foreach}
+                                            </ul>
+                                        {/if}
+                                        <button type="submit" name="submit"
+                                                class="mt-3 btn btn-success btn-block py-3"
+                                                style="outline: none; cursor: inherit;">Отправить
+                                        </button>
+                                    </form>
+                                {else}
                                     <div class="berrors">
                                         <b>Информация</b><br>
-                                        Посетители, находящиеся в группе <b>Гости</b>, не могут оставлять комментарии 
+                                        Посетители, находящиеся в группе <b>Гости</b>, не могут оставлять комментарии
                                         к данной публикации.
-					                </div>
-                                <?php endif;?>
+                                    </div>
+                                {/if}
                             </div>
                             
                             <!--  //contact form grid ends here -->
-                        <?php foreach($comments as $comment): ?>
+                        {foreach $comments as $comment}
                         <div class="media py-5">
-                            <img src="/template/images/profile/<?php echo $comment['image'] ?>" class="mr-3 img-fluid" alt="image" >
+                            <img src="/template/images/profile/{$comment->image}" class="mr-3 img-fluid" alt="image" >
                             <div class="media-body mt-6">
                                 <h5 class="mt-0 editContent"
-                                    style="outline: none; cursor: inherit;"><?php echo $comment['name']; ?></h5>
+                                    style="outline: none; cursor: inherit;">{$comment->name}</h5>
                                 <p class="mt-2 editContent">
-                                    <?php echo $comment['comment']; ?>
+                                    {$comment->text}
                                 </p>
                         </div>
                             </div>
-                         <?php endforeach;?>
+                        {/foreach}
 
                     </div>
                 </div>
