@@ -1,4 +1,17 @@
 $(function() {
+	$('.genre').change(function (){
+		let selectedGenres = $('.editContent').find(".genre:checked"),
+			selectedGenresList = "";
+		$.each(selectedGenres, function(index, value){
+			if (index === 0) {
+				selectedGenresList = selectedGenresList + value.id ;
+			} else {
+				selectedGenresList = selectedGenresList + ',' + value.id ;
+			}
+		});
+		window.location.href = '/?genres=' + selectedGenresList;
+	})
+
 	$('.buybtn').click(function (e) {
 		e.preventDefault();
 		loadNotification()

@@ -88,11 +88,10 @@
                         <div class="left-side my-4">
                             <h3 class="sear-head editContent">Жанры</h3>
                             <ul class="w3layouts-box-list">
-                                {foreach $genres as $genre => $ruNameGenre}
+                                {foreach $genres as $genre}
                                     <li class="editContent">
-                                        <a href="/?page=1&genre={$genre}">
-                                            <button class="btn genre">{$ruNameGenre}</button>
-                                        </a>
+                                        <input type="checkbox" class="genre" id={$genre->id} {if in_array($genre->id, $selectedGenresArr)} checked="checked"{/if}>
+                                        {$genre->genre_name}
                                     </li>
                                 {/foreach}
                             </ul>
@@ -147,9 +146,16 @@
                                 <br>
                             <ul>
                             <li style="list-style: none"><span><b>Автор:</b> {$product->author}</span>
-                                <li style="list-style: none"><span><b>Жанр:</b> {$genre}</span>
+                                <li style="list-style: none"><span><b>Жанры:</b>
+                                        {foreach $productGenres as $key => $genre}
+                                            {if $key == array_key_last($productGenres->toArray())}
+                                                {$genre->genre_name}
+                                            {else}
+                                                {$genre->genre_name},
+                                            {/if}
+                                        {/foreach}
+                                    </span>
                                 </li>
-
                                 <div class="share-desc">
                                     <div class="share">
                                         <h4 class="editContent"

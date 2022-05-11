@@ -1,16 +1,20 @@
 <?php
 
 use App\Models\Products;
+use App\Models\Genres;
 use App\Components\Pagination;
-use App\Components\GenresList;
 
 $page = $_GET['page'] ?? 1;
-$genre = $_GET['genre'] ?? '';
+$selectedGenres = $_GET['genres'] ?? '';
+$selectedGenresArr = explode(",", $selectedGenres);
 
 $productsQuery = Products::query();
 
-if ($genre) {
-    $productsQuery->where('genre', $genre);
+if ($selectedGenres) {
+    $productsQuery
+        ->join('product-genres', 'product.id', '=', 'product-genres.id_product')
+        ->whereIn('product-genres.id_genre', $selectedGenresArr)
+        ->groupBy('product.id');
 }
 
 $search = $_GET['search'] ?? '';
@@ -26,7 +30,7 @@ $productsOnPage = $productsQuery
     ->take(Pagination::LIMIT)
     ->get();
 
-$genres = GenresList::getGenresList();
+$genres = Genres::all();
 
 $latestProducts = Products::getLatestProducts();
 
@@ -34,7 +38,8 @@ $smarty = new Smarty();
 $smarty->assign('products', $productsOnPage);
 $smarty->assign('totalPages', $totalPages);
 $smarty->assign('genres', $genres);
-$smarty->assign('genre', $genre);
+$smarty->assign('selectedGenres', $selectedGenres);
+$smarty->assign('selectedGenresArr', $selectedGenresArr);
 $smarty->assign('search', $search);
 $smarty->assign('latestProducts', $latestProducts);
 $smarty->display(ROOT.'/views/site/index.tpl');

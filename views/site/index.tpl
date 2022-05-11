@@ -28,11 +28,10 @@
                             <div class="left-side my-4">
                                 <h3 class="sear-head editContent">Жанры</h3>
                                 <ul class="w3layouts-box-list">
-                                    {foreach $genres as $genre => $ruNameGenre}
+                                    {foreach $genres as $genre}
                                         <li class="editContent">
-                                            <a href="/?page=1&genre={$genre}">
-                                                <button class="btn genre">{$ruNameGenre}</button>
-                                            </a>
+                                            <input type="checkbox" class="genre" id={$genre->id} {if in_array($genre->id, $selectedGenresArr)} checked="checked"{/if}>
+                                            {$genre->genre_name}
                                         </li>
                                     {/foreach}
                                 </ul>
@@ -96,7 +95,7 @@
                     <ul class="pagination pagination-lg">
                         {foreach $totalPages as $page}
                             <li class="page-item">
-                                <a class="page-link" href="/?page={$page}&genre={$genre}&search={$search}">
+                                <a class="page-link" href="/?page={$page}&genres={$selectedGenres}&search={$search}">
                                     {$page}
                                 </a>
                             </li>

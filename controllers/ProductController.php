@@ -3,14 +3,19 @@
 use App\Models\Products;
 use App\Models\Users;
 use App\Models\Comments;
-use App\Components\GenresList;
+use App\Models\Genres;
 
 $id = ($_GET['id']) ?? header('Location: /');
-$genres = GenresList::getGenresList();
+$genres = Genres::all();;
 $latestProducts = Products::getLatestProducts();
 $product = Products::where('id', $id)->first();
-$genre = $genres[$product->genre];
+if (!$product){
+    header('Location: /');
+}
 $errors = [];
+
+$selectedGenres = $_GET['genres'] ?? '';
+$selectedGenresArr = explode(",", $selectedGenres);
 
 // Если пользователь оставил комментарий, то записать это в сессию и установить комментарий для книги
 if (isset($_POST['submit'])) {
@@ -32,17 +37,26 @@ if (isset($_POST['submit'])) {
 }
 
 $comments = Comments::query()
-    ->leftJoin('user', 'user_id', '=', 'user.id')
+    ->join('user', 'user_id', '=', 'user.id')
     ->where('book_id', '=', $id)
+    ->get();
+
+$productGenres = Products::query()
+    ->select('genres.genre_name')
+    ->join('product-genres', 'product.id', '=', 'product-genres.id_product')
+    ->join('genres', 'genres.id', '=', 'product-genres.id_genre')
+    ->where('product-genres.id_product', $id)
     ->get();
 
 $smarty = new Smarty();
 $smarty->assign('product', $product);
+$smarty->assign('productGenres', $productGenres);
 $smarty->assign('comments', $comments);
 $smarty->assign('errors', $errors);
 $smarty->assign('genres', $genres);
-$smarty->assign('genre', $genre);
 $smarty->assign('latestProducts', $latestProducts);
+$smarty->assign('selectedGenres', $selectedGenres);
+$smarty->assign('selectedGenresArr', $selectedGenresArr);
 $smarty->display(ROOT.'/views/product/index.tpl');
 
 
