@@ -9,11 +9,9 @@ session_start();
 define('ROOT', dirname(__FILE__));
 
 require_once(ROOT.'/application/vendor/autoload.php');
-require_once(ROOT.'/captcha/vendor/autoload.php');
-require_once(ROOT.'/libs/Smarty.class.php');
 
 // 3. Установка соединения с БД
-$DB = new App\Models\Database;
+$DB = new App\Components\Database;
 
 // 4. Вызор Router
 $router = new App\Components\Router;

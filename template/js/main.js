@@ -1,4 +1,5 @@
 $(function() {
+
 	$('.genre').change(function (){
 		let selectedGenres = $('.editContent').find(".genre:checked"),
 			selectedGenresList = "";

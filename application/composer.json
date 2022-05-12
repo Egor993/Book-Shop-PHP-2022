@@ -1,6 +1,8 @@
 {
  "require": {
-	"laravel/framework": "^8.44.0"
+	"illuminate/database": "8.4",
+	"smarty/smarty": "^3.1",
+	"gregwar/captcha": "^1.1"
  },
  
  "autoload": {
