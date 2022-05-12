@@ -1,7 +1,6 @@
 <?php
 
 use App\Components\Cart;
-use App\Components\User;
 use App\Models\Products;
 
 if (isset($_POST['action'])) {
@@ -21,18 +20,14 @@ if (isset($_POST['action'])) {
     }
 }
 
-
 $totalPrice = 0;
 $products = [];
-
-// Получаемм данные из корзины
 $productsInCart = Cart::getProducts();
 
 if ($productsInCart) {
     // Получаем полную информацию о товарах для списка
     $productsIds = array_keys($productsInCart);
     $products = Products::whereIn('id', $productsIds)->get();
-
     // Получаем общую стоимость товаров
     $totalPrice = Cart::getTotalPrice($products);
 }

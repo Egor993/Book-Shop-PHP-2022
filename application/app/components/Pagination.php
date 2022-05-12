@@ -4,9 +4,6 @@ namespace App\Components;
 
 class Pagination
 {
-    /**
-     * Общее количество записей
-     */
     private $totalEntries;
 
     /**
@@ -16,7 +13,6 @@ class Pagination
 
     public function __construct($totalEntries)
     {
-        # Устанавливаем общее количество записей
         $this->totalEntries = $totalEntries;
     }
 

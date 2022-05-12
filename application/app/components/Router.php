@@ -4,70 +4,44 @@ namespace App\Components;
 
 class Router
 {
-
 	private $routes;
 
 	public function __construct()
 	{
 		$routesPath = ROOT.'/config/routes.php';
-		$this->routes = include($routesPath);
+		$this->routes = require($routesPath);
 	}
 
-// Return type
-
-	private function getURI()
+	private function getURI(): string
 	{
 		if (!empty($_SERVER['REQUEST_URI'])) {
 		return trim($_SERVER['REQUEST_URI'], '/');
 		}
 	}
 
-	public function run()
+	public function run(): void
 	{
-//        include_once('C:\OpenServer\domains\Book-Shop-PHP-2022/controllers/CartController.php');
-//        return;
 		$uri = $this->getURI();
 
 		foreach ($this->routes as $uriPattern => $path) {
 
 			if(preg_match("~$uriPattern~", $uri)) {
-
-/*				echo "<br>Где ищем (запрос, который набрал пользователь): ".$uri;
-				echo "<br>Что ищем (совпадение из правила): ".$uriPattern;
-				echo "<br>Кто обрабатывает: ".$path; */
-
 				// Получаем внутренний путь из внешнего согласно правилу.
-
 				$internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-
-/*				echo '<br>Нужно сформулировать: '.$internalRoute.'<br>'; */
 
 				$segments = explode('/', $internalRoute);
 
 				$controllerName = array_shift($segments).'Controller';
 				$controllerName = ucfirst($controllerName);
 
-				$actionName = 'action'.ucfirst(array_shift($segments));
-
-                $urlParameters = $segments;
-
 				$controllerFile = ROOT . '/controllers/' .$controllerName. '.php';
+
 				if (file_exists($controllerFile)) {
-					include_once($controllerFile);
+					require_once($controllerFile);
 				}
 
 				break;
-
-//				$controllerObject = new $controllerName;
-//				/*$result = $controllerObject->$actionName($parameters); - OLD VERSION */
-//				/*$result = call_user_func(array($controllerObject, $actionName), $parameters);*/
-//				$result = call_user_func_array(array($controllerObject, $actionName), $urlParameters);
-//
-//				if ($result != null) {
-//					break;
-//				}
 			}
-
 		}
 	}
 }

@@ -19,18 +19,14 @@
 </head>
 
 <body>
-<!-- mian-content -->
     <div id="page" class="page">
         <div class="main-banner bg bg1" id="home" >
-            <!-- header -->
             <header class="header">
                 <div class="container-fluid px-lg-5">
-                    <!-- nav -->
                     <nav class="py-4">
                         <div id="logo">
                             <h1> <a href="/" class="editContent">Book Shop</a></h1>
                         </div>
-
                         <label for="drop" class="toggle">Menu</label>
                         <input type="checkbox" id="drop">
                         <ul class="menu mt-2">
@@ -48,24 +44,14 @@
                             <span id='cart-count'>{App\Components\Cart::countItems()}</span>
                         </ul>
                     </nav>
-                    <!-- /nav -->
                 </div>
             </header>
-            <!--banner-->
             <div class="banner-info">
                 <p class="editContent" >Чтение для ума — то же, что физические упражнения для тела</p>
                 <h3 class="mb-4 editContent">Книги мира</h3>
-                <div class="ban-buttons">
-
-
-                </div>
             </div>
-            <!--// banner-inner -->
-            <!-- /header -->
-
         </div>
     </div>
-
 </body>
 
 <script>

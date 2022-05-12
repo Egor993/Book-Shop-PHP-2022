@@ -4,36 +4,36 @@ use App\Models\Products;
 use App\Models\Genres;
 use App\Components\Pagination;
 
-$page = $_GET['page'] ?? 1;
+$currentPage = $_GET['page'] ?? 1;
+$search = $_GET['search'] ?? '';
 $selectedGenres = $_GET['genres'] ?? '';
 $selectedGenresArr = explode(",", $selectedGenres);
+$genres = Genres::all();
+$latestProducts = Products::getLatestProducts();
 
 $productsQuery = Products::query()
-    ->select('products.id as id', 'products.image', 'products.name', 'products.price');
+    ->select('products.id', 'products.image', 'products.name', 'products.price');
 
 if ($selectedGenres) {
     $productsQuery
-        ->join('products-genres as pg', 'id', '=', 'pg.id_product')
+        ->join('products-genres as pg', 'products.id', '=', 'pg.id_product')
         ->whereIn('pg.id_genre', $selectedGenresArr)
-        ->groupBy('id');
+        ->groupBy('products.id');
 }
 
-$search = $_GET['search'] ?? '';
 if ($search) {
     $productsQuery->where('name', 'LIKE', "%{$search}%");
 }
 
-$pagination = new Pagination($totalEntries = count($productsQuery->get()));
+$totalEntries = count($productsQuery->get());
+
+$pagination = new Pagination($totalEntries);
 $totalPages = $pagination->getTotalPages();
 
 $productsOnPage = $productsQuery
-    ->skip(Pagination::LIMIT * ($page -1))
+    ->skip(Pagination::LIMIT * ($currentPage -1))
     ->take(Pagination::LIMIT)
     ->get();
-
-$genres = Genres::all();
-
-$latestProducts = Products::getLatestProducts();
 
 $smarty = new Smarty();
 $smarty->assign('products', $productsOnPage);

@@ -7,38 +7,33 @@ use App\Components\Image;
 if (User::isGuest()) {
     header("Location: /login");
 }
-// Получаем данные пользователя
-$name = $_SESSION['user'];
+
+$userName = $_SESSION['user'];
 $passErrors = [];
 $imgErrors = [];
 $isPassChanged = false;
 
 // Проверяем загрузил пользователь фотографию или нет
-if ((isset($_FILES['image'])) and ($_FILES['image']['name'] != '')){
-    $image_name = '';
+if ((isset($_FILES['image'])) and ($_FILES['image']['name'] != '')) {
     // Настроки загружаемого файла
-    $types = array('image/png', 'image/jpeg');
-    $size = 1024000;
-    // Проверяем тип файла
-    if (!in_array($_FILES['image']['type'], $types))	{
+    $allowedTypes = ['image/png', 'image/jpeg'];
+    $fileSize = 1024000;
+    if (!in_array($_FILES['image']['type'], $allowedTypes))	{
         $imgErrors[] = 'Запрещённый тип файла';
-    }
-    // Проверяем размер файла
-    else if ($_FILES['image']['size'] > $size){
+    } else if ($_FILES['image']['size'] > $fileSize) {
         $imgErrors[] = 'Слишком большой размер файла';
-    }
-    else {
+    } else {
         // Изменяем пропорции загруженной фотографии под стандартные
-        $image_name = Image::resize($_FILES['image']);
+        $imageName = Image::resize($_FILES['image']);
         // Добавляем название файла фото в БД
-        Users::where('name', $name)->update(['image' => $image_name]);
+        Users::where('name', $userName)->update(['image' => $imageName]);
         // Копируем файл фото из временной папки и удаляем его оттуда
-        copy('template/images/tmp/' . $image_name, 'template/images/profile/' . $image_name);
-        unlink('template/images/tmp/' . $image_name);
+        copy('template/images/tmp/' . $imageName, 'template/images/profile/' . $imageName);
+        unlink('template/images/tmp/' . $imageName);
     }
 }
 
-$user = Users::where('name', $name)->first();
+$user = Users::where('name', $userName)->first();
 
 if (isset($_POST['submit'])) {
     $isOldPasswordCorrect = $user->password == strip_tags($_POST['oldPassword']);

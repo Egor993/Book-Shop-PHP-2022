@@ -33,7 +33,7 @@
 							<img class="row-image" src="/template/images/{$product->image}">
 						</div>
 						<div style="flex:2">
-							<a href="/product/{$product->id}">
+							<a href="/product?id={$product->id}">
 								{$product->name}
 							</a>
 						</div>

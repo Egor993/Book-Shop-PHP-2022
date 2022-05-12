@@ -2,10 +2,11 @@
 
 namespace App\Models;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
 
 class Products extends BaseModel
 {
-    public static function getLatestProducts(): \Illuminate\Database\Eloquent\Collection
+    public static function getLatestProducts(): Collection
     {
         return self::query()
             ->orderBy('id', 'desc')
