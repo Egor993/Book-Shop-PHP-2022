@@ -1,21 +1,13 @@
 <?php
-namespace App\Components
-;
+namespace App\Components;
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Database {
     function __construct() {
+        $dbParams = require(ROOT.'/config/db_params.php');
         $capsule = new Capsule;
-        $capsule->addConnection([
-            "driver" => 'mysql',
-            "host" => 'localhost',
-            "database" => 'phpshop',
-            "username" => 'root',
-            "password" => '',
-            "charset" => "utf8",
-            "collation" => "utf8_unicode_ci",
-            "prefix" => "",
-        ]);
+        $capsule->addConnection($dbParams);
 
         $capsule->bootEloquent();
     }

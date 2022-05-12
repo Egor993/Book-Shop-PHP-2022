@@ -14,7 +14,6 @@
 
 					<div id="shipping-info">
 						<hr>
-
 						<hr>
 						<div class="form-field">
 							<input class="form-control" type="text" name="userPhone" placeholder="Телефон.." value="{$phone}">
@@ -55,7 +54,7 @@
 				<hr>
 				{foreach $products as $product}
 					<div class="cart-row">
-						<div style="flex:2"><img class="row-image" src="/template/images/{$product->image}"></div>
+						<div style="flex:2"><img class="row-image" src="/template/images/products/{$product->image}"></div>
 						<div style="flex:2"><a href="../../index.php">{$product->name}</a></div>
 						<div style="flex:1"><p>{$product->price} руб</p></div>
 						<div style="flex:1"><p>x{$productsInCart[$product->id]} шт</p></div>
@@ -68,6 +67,6 @@
 	</div>
 {else}
 	<br>
-	<div class="p-3 mb-2 bg-success text-white">Заказ оформлен, наш менеджер скоро с вами свяжется</div>
+	<div class="p-3 mb-2 bg-success text-white">Заказ оформлен, наш менеджер скоро с вами свяжется.</div>
 	<br>
 {/if}

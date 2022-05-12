@@ -20,11 +20,6 @@ if ($productsInCart == false) {
     header("Location: /");
 }
 
-// Подключение капчи
-$captcha = Captcha::getCaptcha();
-$captchaImage = $captcha->inline();
-$_SESSION['captcha'] = $captcha->getPhrase();
-
 if (isset($_POST['submit'])) {
     $userName = $_POST['userName'];
     $userPhone = $_POST['userPhone'];
@@ -58,6 +53,11 @@ $products = Products::whereIn('id', array_keys($productsInCart))->get();
 
 $totalQuantity = Cart::countItems();
 $totalPrice = Cart::getTotalPrice($products);
+
+// Подключение капчи
+$captcha = Captcha::getCaptcha();
+$captchaImage = $captcha->inline();
+$_SESSION['captcha'] = $captcha->getPhrase();
 
 $smarty = new Smarty();
 $smarty->assign('products', $products);

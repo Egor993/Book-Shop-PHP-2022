@@ -42,7 +42,7 @@
                         <div class="special-sec1 row mt-3 editContent" >
                             <div class="img-deals col-md-4">
                                 <a href="/product?id={$product->id}">
-                                <img src="/template/images/{$product->image}" class="img-fluid" alt="" >
+                                <img src="/template/images/products/{$product->image}" class="img-fluid" alt="" >
                             </div>
                             <div class="img-deal1 col-md-8">
                                 <h3 class="editContent" >{$product->name}</h3>
@@ -61,7 +61,7 @@
                             <div class="product-shoe-info editContent text-center mt-lg-4" >
                                 <div class="men-thumb-item">
                                     <a href="product?id={$product->id}" class="editContent" >
-                                    <img src="/template/images/{$product->image}"  class="img-fluid-main">
+                                    <img src="/template/images/products/{$product->image}"  class="img-fluid-main">
                                 </div>
                                 <div class="item-info-product">
                                     <h4>

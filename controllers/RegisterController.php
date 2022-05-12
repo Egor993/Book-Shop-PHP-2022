@@ -46,6 +46,7 @@ if (isset($_POST['submit'])) {
             'email' => $email,
             'password' => $password1,
             'role' => $role,
+            'image' => 'unnamed.jpg',
         ]);
 
         User::auth($name);

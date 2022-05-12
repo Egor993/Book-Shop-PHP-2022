@@ -97,7 +97,7 @@
                         <div class="special-sec1 row mt-3 editContent" >
                             <div class="img-deals col-md-4">
                                 <a href="/product?id={$product->id}">
-                                    <img src="/template/images/{$product->image}" class="img-fluid" alt="" >
+                                    <img src="/template/images/products/{$product->image}" class="img-fluid" alt="" >
                             </div>
                             <div class="img-deal1 col-md-8">
                                 <h3 class="editContent" >{$product->name}</h3>
@@ -112,7 +112,7 @@
             <div class="left-ads-display col-lg-8">
                 <div class="row">
                     <div class="desc1-left col-md-6">
-                        <img src="/template/images/{$product->image}" class="img-fluid" alt="">
+                        <img src="/template/images/products/{$product->image}" class="img-fluid" alt="">
                     </div>
                     <div class="desc1-right col-md-6 pl-lg-4">
                          <div class="item-info-product">

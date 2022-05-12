@@ -31,8 +31,8 @@ $pagination = new Pagination($totalEntries);
 $totalPages = $pagination->getTotalPages();
 
 $productsOnPage = $productsQuery
-    ->skip(Pagination::LIMIT * ($currentPage -1))
-    ->take(Pagination::LIMIT)
+    ->skip(Pagination::LIMIT_ENTRIES_ON_PAGE * ($currentPage -1))
+    ->take(Pagination::LIMIT_ENTRIES_ON_PAGE)
     ->get();
 
 $smarty = new Smarty();

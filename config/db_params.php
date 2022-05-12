@@ -1,8 +1,12 @@
 <?php
 
 return [
-    'host' => 'localhost',
-    'dbname' => 'phpshop',
-    'user' => 'root',
-    'password' => '',
+    "driver" => 'mysql',
+    "host" => 'localhost',
+    "database" => 'phpshop',
+    "username" => 'root',
+    "password" => '',
+    "charset" => "utf8",
+    "collation" => "utf8_unicode_ci",
+    "prefix" => "",
 ];

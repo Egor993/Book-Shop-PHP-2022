@@ -31,7 +31,7 @@
 				{foreach $products as $product}
 					<div class="cart-row product" data-order='{$product->id}'>
 						<div style="flex:2">
-							<img class="row-image" src="/template/images/{$product->image}">
+							<img class="row-image" src="/template/images/products/{$product->image}">
 						</div>
 						<div style="flex:2">
 							<a href="/product?id={$product->id}">

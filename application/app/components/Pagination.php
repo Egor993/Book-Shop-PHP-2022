@@ -6,10 +6,7 @@ class Pagination
 {
     private $totalEntries;
 
-    /**
-     * Записей на страницу
-     */
-    public const LIMIT = 8;
+    public const LIMIT_ENTRIES_ON_PAGE = 8;
 
     public function __construct($totalEntries)
     {
@@ -19,7 +16,7 @@ class Pagination
     public function getTotalPages(): array
     {
         $pages = [];
-        $countPages = ceil($this->totalEntries / self::LIMIT);
+        $countPages = ceil($this->totalEntries / self::LIMIT_ENTRIES_ON_PAGE);
         for ($i = 1; $i <= $countPages; $i++) {
             $pages[] = $i;
         }
