@@ -9,13 +9,13 @@ $selectedGenres = $_GET['genres'] ?? '';
 $selectedGenresArr = explode(",", $selectedGenres);
 
 $productsQuery = Products::query()
-    ->select('product.id as product_id', 'product.image', 'product.name', 'product.price');
+    ->select('products.id as id', 'products.image', 'products.name', 'products.price');
 
 if ($selectedGenres) {
     $productsQuery
-        ->join('product-genres as pg', 'product.id', '=', 'pg.id_product')
+        ->join('products-genres as pg', 'id', '=', 'pg.id_product')
         ->whereIn('pg.id_genre', $selectedGenresArr)
-        ->groupBy('product.id');
+        ->groupBy('id');
 }
 
 $search = $_GET['search'] ?? '';

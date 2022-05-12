@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         $name = $_SESSION['user'];
         $user = Users::where('name', $name)->first();
         Comments::create([
-            'book_id' => $id,
+            'product_id' => $id,
             'user_id' => $user->id,
             'text' => $comment,
         ]);
@@ -37,15 +37,15 @@ if (isset($_POST['submit'])) {
 }
 
 $comments = Comments::query()
-    ->join('user', 'user_id', '=', 'user.id')
+    ->join('users', 'user_id', '=', 'users.id')
     ->where('product_id', '=', $id)
     ->get();
 
 $productGenres = Products::query()
     ->select('genres.name')
-    ->join('product-genres', 'product.id', '=', 'product-genres.id_product')
-    ->join('genres', 'genres.id', '=', 'product-genres.id_genre')
-    ->where('product-genres.id_product', $id)
+    ->join('products-genres', 'products.id', '=', 'products-genres.id_product')
+    ->join('genres', 'genres.id', '=', 'products-genres.id_genre')
+    ->where('products-genres.id_product', $id)
     ->get();
 
 $smarty = new Smarty();

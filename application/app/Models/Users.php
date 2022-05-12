@@ -5,8 +5,6 @@ use App\Models\BaseModel;
 
 class Users extends BaseModel
 {
-    protected $table = "user";
-
     protected $guarded = [];
 
     public static function isNameExists($name): bool

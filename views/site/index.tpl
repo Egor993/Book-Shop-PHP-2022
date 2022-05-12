@@ -42,7 +42,7 @@
                             {foreach $latestProducts as $product}
                                 <div class="special-sec1 row mt-3 editContent" >
                                     <div class="img-deals col-md-4">
-                                        <a href="/product?id={$product->product_id}">
+                                        <a href="/product?id={$product->id}">
                                         <img src="/template/images/{$product->image}" class="img-fluid" alt="" >
                                     </div>
                                     <div class="img-deal1 col-md-8">
@@ -61,17 +61,17 @@
                                 <div class="col-md-3">
                                     <div class="product-shoe-info editContent text-center mt-lg-4" >
                                         <div class="men-thumb-item">
-                                            <a href="product?id={$product->product_id}" class="editContent" >
+                                            <a href="product?id={$product->id}" class="editContent" >
                                             <img src="/template/images/{$product->image}"  class="img-fluid-main">
                                         </div>
                                         <div class="item-info-product">
                                             <h4>
-                                                <a href="product?id={$product->product_id}">{$product->name}</a>
+                                                <a href="product?id={$product->id}">{$product->name}</a>
                                             </h4>
                                             <h6>
                                                 {$product->price} руб
                                             </h6>
-                                                <a href="#" class="buybtn" data-id='{$product->product_id}'>
+                                                <a href="#" class="buybtn" data-id='{$product->id}'>
                                                     <span class="buybtn-text">
                                                         Купить
                                                     </span>
