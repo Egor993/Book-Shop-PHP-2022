@@ -4,7 +4,6 @@ namespace App\Components;
 
 class Cart
 {
-
     public static function addProduct($id): void
     {
         $id = intval($id);

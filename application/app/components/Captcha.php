@@ -7,8 +7,6 @@ use Gregwar\Captcha\CaptchaBuilder;
 
 class Captcha {
 
-    public $captcha;
-
     public static function getCaptcha(): CaptchaBuilder
     {
         // Настройка каптчи

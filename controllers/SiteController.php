@@ -5,7 +5,7 @@ use App\Models\Genres;
 use App\Components\Pagination;
 
 $currentPage = $_GET['page'] ?? 1;
-$search = $_GET['search'] ?? '';
+$textFromSearch = $_GET['search'] ?? '';
 $selectedGenres = $_GET['genres'] ?? '';
 $selectedGenresArr = explode(",", $selectedGenres);
 $genres = Genres::all();
@@ -21,8 +21,8 @@ if ($selectedGenres) {
         ->groupBy('products.id');
 }
 
-if ($search) {
-    $productsQuery->where('name', 'LIKE', "%{$search}%");
+if ($textFromSearch) {
+    $productsQuery->where('name', 'LIKE', "%{$textFromSearch}%");
 }
 
 $totalEntries = count($productsQuery->get());
@@ -41,6 +41,6 @@ $smarty->assign('totalPages', $totalPages);
 $smarty->assign('genres', $genres);
 $smarty->assign('selectedGenres', $selectedGenres);
 $smarty->assign('selectedGenresArr', $selectedGenresArr);
-$smarty->assign('search', $search);
+$smarty->assign('search', $textFromSearch);
 $smarty->assign('latestProducts', $latestProducts);
 $smarty->display(ROOT.'/views/site/index.tpl');
