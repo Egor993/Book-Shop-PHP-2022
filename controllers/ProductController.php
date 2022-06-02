@@ -38,6 +38,7 @@ if (isset($_POST['submit']) && isset($_SESSION['user'])) {
             'user_id' => $user->id,
             'text' => $comment,
         ]);
+        header("Location: /product?id=$id");
     }
 }
 
