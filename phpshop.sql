@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 01 2022 г., 19:27
+-- Время создания: Июн 02 2022 г., 15:52
 -- Версия сервера: 10.1.48-MariaDB
 -- Версия PHP: 7.4.21
 
@@ -41,7 +41,7 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `product_id`, `user_id`, `text`, `created_at`, `updated_at`) VALUES
-(79, 63, 35, 'Отличная книга!', '2022-05-12 17:14:11', '2022-05-12 17:14:11');
+(80, 63, 39, 'Отличная книга!', '2022-06-02 15:49:59', '2022-06-02 15:49:59');
 
 -- --------------------------------------------------------
 
@@ -184,8 +184,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `image`, `updated_at`, `created_at`) VALUES
-(35, 'egor8765', 'egor8765@mail.ru', '1234567', 'user', 'Bl-iHASDuDU.jpg', '2022-05-12 17:14:51', '2022-05-12 17:13:46'),
-(36, 'egor993', 'Egor9943@yandex.ru', '123456', 'user', 'sobaka-drug-xatiko-glaza.jpg', '2022-05-12 17:22:10', '2022-05-12 17:21:34');
+(39, 'egor8765', 'Egor9943@yandex.ru', '$2y$10$IQzn7zmqgZswMybOM1eXA.iOfZyUZ4dOF6yOYV05h.vJ2r.E4Dl9K', 'user', 'Bl-iHASDuDU.jpg', '2022-06-02 15:49:39', '2022-06-02 15:49:14');
 
 --
 -- Индексы сохранённых таблиц
@@ -242,7 +241,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
@@ -266,7 +265,7 @@ ALTER TABLE `products-genres`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
