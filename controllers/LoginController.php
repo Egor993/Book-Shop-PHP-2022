@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
         $errors[] = 'Пароль не должен быть короче 6-ти символов';
     }
 
-    if (!Users::isUserExist($name, $password)) {
+    if (!Users::isUserDataCorrect($name, $password)) {
         $errors[] = 'Неправильные данные для входа на сайт';
     } else {
         User::auth($name);

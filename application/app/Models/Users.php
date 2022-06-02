@@ -25,14 +25,17 @@ class Users extends BaseModel
         return false;
     }
 
-    public static function isUserExist($name, $password): bool
+    public static function isUserDataCorrect($name, $password): bool
     {
-        $user= self::where([
+        $isPasswordCorrect = false;
+        $user = self::where([
             ['name', '=', $name],
-            ['password', '=', $password],
         ])
             ->first();
         if ($user) {
+            $isPasswordCorrect = password_verify($password, $user->password);
+        }
+        if ($isPasswordCorrect) {
             return true;
         }
         return false;

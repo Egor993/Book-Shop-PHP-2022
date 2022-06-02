@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
         $user = Users::create([
             'name' => $name,
             'email' => $email,
-            'password' => $password1,
+            'password' => password_hash($password1, PASSWORD_DEFAULT),
             'role' => $role,
             'image' => 'unnamed.jpg',
         ]);
